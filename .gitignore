@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Uploads (keep directories but not files)
+public/avatars/*
+!public/avatars/.gitkeep
+public/chat-files/*
+!public/chat-files/.gitkeep
+public/post-images/*
+!public/post-images/.gitkeep
+public/post-videos/*
+!public/post-videos/.gitkeep
