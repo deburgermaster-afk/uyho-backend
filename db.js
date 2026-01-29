@@ -2,7 +2,8 @@ import mysql from 'mysql2';
 import 'dotenv/config';
 
 // MySQL Database Connection Pool
-const pool = mysql.createPool({
+// Supports both regular MySQL and PlanetScale (with SSL)
+const poolConfig = {
   host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 3306,
   user: process.env.DB_USER || 'root',
@@ -11,7 +12,16 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
-});
+};
+
+// Enable SSL for PlanetScale or other cloud databases
+if (process.env.DB_SSL === 'true') {
+  poolConfig.ssl = {
+    rejectUnauthorized: true
+  };
+}
+
+const pool = mysql.createPool(poolConfig);
 
 // Promisify for async/await
 const promisePool = pool.promise();
